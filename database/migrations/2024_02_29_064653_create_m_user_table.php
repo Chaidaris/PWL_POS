@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('m_user', function (Blueprint $table) {
             $table->id('user_id'); // primary key (auto increment)
             $table->unsignedBigInteger('level_id')->index(); // indexing untuk FK
-            $table->string('user_nama', 20)->unique(); // membuat kolom user_nama dengan tipe data string
+            $table->string('username', 20)->unique(); // membuat kolom user_nama dengan tipe data string
             $table->string('nama', 100); // membuat kolom nama dengan tipe data string
             $table->string('password'); // membuat kolom password dengan tipe data string
             $table->timestamps();
