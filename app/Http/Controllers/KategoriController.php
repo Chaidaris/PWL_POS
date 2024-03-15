@@ -18,7 +18,6 @@ class KategoriController extends Controller
     {
         return view('kategori.create');
     }
-
     public function store(Request $request)
     {
         KategoriModel::create([
@@ -27,4 +26,6 @@ class KategoriController extends Controller
         ]);
         return redirect('/kategori');
     }
+
+    
 }
