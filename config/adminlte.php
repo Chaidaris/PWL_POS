@@ -308,8 +308,24 @@ return [
         // Sidebar items:
         ['header' => 'MENU UTAMA'],
         [
+            'text' => 'Dashboard',
+            'url' => '/',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
+        ],
+        [
+            'text' => 'Manage User',
+            'url' => '/user',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Manage Level',
+            'url' => '/level',
+            'icon' => 'fas fa-fw fa-user-tag',
+        ],
+        [
             'text' => 'Manage Kategori',
             'url' => '/kategori',
+            'icon' => 'fas fa-fw fa-list',
         ],
     ],
 

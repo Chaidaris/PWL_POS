@@ -5,55 +5,53 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Hash;
+use App\DataTables\UserDataTable;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
-        $user = UserModel::with('level')->get(); 
-        return view('user', ['data' => $user]);
+        return $dataTable->render('user.index');
     }
 
-    public function tambah()
+    public function create()
     {
-        return view('user_tambah');
+        return view('user.create');
     }
 
-    public function tambah_simpan(Request $request)
+    public function store(Request $request)
     {
         UserModel::create([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => Hash::make($request->password),
-            'level_id' => $request->level_id,
+            'level_id' => $request->levelId,
         ]);
         return redirect('/user');
     }
 
     public function ubah($id)
     {
-        $data = UserModel::find($id);
-        return view('user_ubah', ['data' => $data]);
+        $user = UserModel::find($id);
+        return view('user.ubah', compact('user'));
     }
 
     public function ubah_simpan($id, Request $request)
     {
-        $data = UserModel::find($id);
-        $data->username = $request->username;
-        $data->nama = $request->nama;
-        $data->password = Hash::make('$request->password');
-        $data->level_id = $request->level_id;
-        $data->save();
+        $user = UserModel::find($id);
+        $user->username = $request->username;
+        $user->nama = $request->nama;
+        $user->password = Hash::make($request->password);
+        $user->level_id = $request->levelId;
+        $user->save();
         return redirect('/user');
     }
 
     public function hapus($id)
     {
-        $data = UserModel::find($id);
-        $data->delete();
+        $user = UserModel::find($id);
+        $user->delete();
         return redirect('/user');
     }
-
-
 
 }

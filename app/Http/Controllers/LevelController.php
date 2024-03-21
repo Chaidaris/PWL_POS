@@ -4,21 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\LevelModel;
+use App\DataTables\LevelDataTable;
 
 class LevelController extends Controller
 {
-    public function index()
+    public function index(LevelDataTable $dataTable)
     {
-        // DB::insert('insert into m_level(level_kode,level_nama, created_at) values(?,?,?)', ['CUS','Pelanggan', now()]);
-        // return 'Insert data berhasil';
+        return $dataTable->render('level.index');
+    }
 
-        // $row = DB::update('update m_level set level_nama = ? where level_kode = ?', ['Customer', 'CUS']);
-        // return 'Update data berhasil. Jumlah data yang diupdate: ' . $row . ' baris';
+    public function create()
+    {
+        return view('level.create');
+    }
 
-        // $row = DB::delete('delete from m_level where level_kode = ?', ['CUS']);
-        // return 'Delete data berhasil. Jumlah data yang dihapus: ' . $row . ' baris';
+    public function store(Request $request)
+    {
+        LevelModel::create([
+            'level_kode' => $request->kodeLevel,
+            'level_nama' => $request->namaLevel,
+        ]);
+        return redirect('/level');
+    }
 
-        $data = DB::select('select * from m_level');
-        return view('level', ['data' => $data]);
+    public function ubah($id)
+    {
+        $level = LevelModel::find($id);
+        return view('level.ubah', compact('level'));
+    }
+
+    public function ubah_simpan($id, Request $request)
+    {
+        $level = LevelModel::find($id);
+        $level->level_kode = $request->kodeLevel;
+        $level->level_nama = $request->namaLevel;
+        $level->save();
+        return redirect('/level');
+    }
+
+    public function hapus($id)
+    {
+        $level = LevelModel::find($id);
+        $level->delete();
+        return redirect('/level');
     }
 }
