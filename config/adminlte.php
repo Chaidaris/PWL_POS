@@ -306,26 +306,28 @@ return [
         ],
 
         // Sidebar items:
-        ['header' => 'MENU UTAMA'],
+        ['header' => 'Menu Utama'],
         [
             'text' => 'Dashboard',
             'url' => '/',
             'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
+        ['header' => 'Data Pengguna'],
         [
-            'text' => 'Manage User',
+            'text' => 'Data User',
             'url' => '/user',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Manage Level',
+            'text' => 'Level User',
             'url' => '/level',
-            'icon' => 'fas fa-fw fa-user-tag',
+            'icon' => 'fas fa-fw fa-users-cog',
         ],
+        ['header' => 'Data Barang'],
         [
-            'text' => 'Manage Kategori',
+            'text' => 'Kategori Barang',
             'url' => '/kategori',
-            'icon' => 'fas fa-fw fa-list',
+            'icon' => 'fas fa-fw fa-bookmark',
         ],
     ],
 
