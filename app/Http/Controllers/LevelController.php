@@ -100,18 +100,26 @@ class LevelController extends Controller
             'list' => ['Home', 'Level', 'Edit']
         ];
 
+        $page = (object) [
+            'title' => 'Edit Level',
+        ];
+
+        $activeMenu = 'level';
+
         $level = LevelModel::find($id);
 
-        return view('level.edit', ['breadcrumb' => $breadcrumb, 'level' => $level]);
+        return view('level.edit', ['breadcrumb' => $breadcrumb, 'level' => $level, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
     public function update(Request $request, $id){
         $request->validate([
-            'nama' => 'required'
+            'level_kode' => 'required',
+            'level_nama' => 'required'
         ]);
 
-        DB::table('level')->where('level_id', $id)->update([
-            'nama' => $request->nama
+        LevelModel::find($id)->update([
+            'level_kode' => $request->level_kode,
+            'level_nama' => $request->level_nama
         ]);
 
         return redirect('/level')->with('success', 'Data berhasil diubah');
