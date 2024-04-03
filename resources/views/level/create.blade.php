@@ -1,34 +1,43 @@
-@extends('layouts.app')
-
-{{-- Customize layout sections --}}
-@section('subtitle', 'Level User')
-@section('content_header_title', 'Level User')
-@section('content_header_subtitle', 'Create')
-
-{{-- Content body: main page content --}}
-@section('content_body')
-    <div class="container">
-        <div class="card">
-            <div class="card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Buat Level User Baru</h3>
-            </div>
-            <form method="POST" action="../level">
-                {{ csrf_field() }}
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="kodeLevel">Kode Level User</label>
-                        <input type="number" class="form-control" id="kodeLevel" name="kodeLevel" placeholder="Masukkan Kode Level User">
-                    </div>
-                    <div class="form-group">
-                        <label for="namaLevel">Nama Level User</label>
-                        <input type="text" class="form-control" id="namaLevel" name="namaLevel" placeholder="Masukkan Nama Level User">
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
+@extends('layouts.template')
+@section('content')
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h3 class="card-title">{{ $page->title }}</h3>
+        <div class="card-tools"></div>
     </div>
+    <div class="card-body">
+        <form method="POST" action="{{ url('level') }}" class="form-horizontal">
+            @csrf
+            <div class="form-group row">
+                <label class="col-1 control-label col-form-label">Level Kode</label>
+                <div class="col-11">
+                    <input type="text" class="form-control" id="level_kode" name="level_kode" value="{{ old('level_kode') }}" required>
+                    @error('level_kode')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-1 control-label col-form-label">Level Nama</label>
+                <div class="col-11">
+                    <input type="text" class="form-control" id="level_nama" name="level_nama" value="{{ old('level_nama') }}" required>
+                    @error('level_nama')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-1 control-label col-form-label"></label>
+                <div class="col-11">
+                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                    <a class="btn btn-sm btn-default ml-1" href="{{ url('level') }}">Kembali</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
+@push('css')
+@endpush
+@push('js')
+@endpush

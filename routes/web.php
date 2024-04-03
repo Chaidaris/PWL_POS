@@ -31,16 +31,13 @@ Route::group(['prefix' => 'user'], function () {
     Route::delete('/{id}', [UserController::class, 'destroy']);
 });
 
-Route::get('/kategori', [KategoriController::class, 'index']);
-Route::get('/kategori/create', [KategoriController::class, 'create']);
-Route::post('/kategori', [KategoriController::class, 'store']);
-Route::get('/kategori/{id}/ubah', [KategoriController::class, 'ubah']);
-Route::put('/kategori/{id}', [KategoriController::class, 'ubah_simpan']);
-Route::delete('/kategori/{id}', [KategoriController::class, 'hapus']);
-
-Route::get('level', [LevelController::class, 'index']);
-Route::get('level/create', [LevelController::class, 'create']);
-Route::post('level', [LevelController::class, 'store']);
-Route::get('level/{id}/ubah', [LevelController::class, 'ubah']);
-Route::put('level/{id}', [LevelController::class, 'ubah_simpan']);
-Route::delete('level/{id}', [LevelController::class, 'hapus']);
+Route::group(['prefix' => 'level'], function () {
+    Route::get('/', [LevelController::class, 'index']);
+    Route::post('/list', [LevelController::class, 'list']);
+    Route::get('/create', [LevelController::class, 'create']);
+    Route::post('/', [LevelController::class, 'store']);
+    Route::get('/{id}', [LevelController::class, 'show']);
+    Route::get('/{id}/edit', [LevelController::class, 'edit']);
+    Route::put('/{id}', [LevelController::class, 'update']);
+    Route::delete('/{id}', [LevelController::class, 'destroy']);
+});
