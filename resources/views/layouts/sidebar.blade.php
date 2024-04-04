@@ -53,9 +53,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/barang') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }}">
+          <a href="{{ url('/penjualan') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }}">
             <i class="nav-icon fas fa-cash-register"></i>
             <p>Transaksi Penjualan</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url('/detail') }}" class="nav-link {{ $activeMenu == 'detail' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>Detail Penjualan</p>
           </a>
         </li>
       </ul>
