@@ -4,9 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Foundation\Auth\Barang as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class BarangModel extends Model
 {
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
     use HasFactory;
 
     protected $table = 'm_barang';
@@ -18,10 +31,18 @@ class BarangModel extends Model
         'barang_nama',
         'harga_beli',
         'harga_jual',
+        'image'
     ];
 
     public function kategori()
     {
         return $this->belongsTo(KategoriModel::class, 'kategori_id', 'kategori_id');
+    }
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($image) => url('/storage/posts/' . $image),
+        );
     }
 }
